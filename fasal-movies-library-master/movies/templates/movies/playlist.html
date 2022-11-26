@@ -1,0 +1,47 @@
+{% extends 'movies/layout.html' %}
+
+{% load static %}
+
+{% block title %}List{% endblock %}
+
+{% block style %}
+<link href="{% static 'movies/list.css' %}" rel="stylesheet" />
+{% endblock %}
+
+{% block content %}
+<div class="card" style="margin-top: 50px">
+  <div class="card-body">
+    {% if lists %}
+    <h2>Add to Playlists</h2>
+    <form action="{% url 'update' %}" method="POST">
+      {% csrf_token %}
+      <input
+        type="text"
+        value="{{ imdb_id }}"
+        style="display: none"
+        name="imdb_id"
+      />
+      {% for list in lists %}
+      <div>
+      <input
+        type="checkbox"
+        name="playlists"
+        id="{{ list.id }}"
+        value="{{ list.id }}"
+        style="color: white"
+      />
+      <label for="{{ list.id }}">{{ list.name }}</label>
+      </div>
+      {% endfor %}
+      <button type="submit" class="btn btn-success">Save</button>
+      <a href="{% url 'index' %}" class="btn btn-danger">Cancel</a>
+    </form>
+    {% else %}
+    <h1>You don't have any playlists yet.</h1>
+    <p>Please create a new playlist first.</p>
+    <a href="{% url 'index' %}" class="btn btn-danger">Create a new playlist</a>
+    {% endif %}
+  </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,36 @@
+{% extends 'movies/layout.html' %}
+{% load static %}
+
+{% block title %}List{% endblock %}
+
+{% block style %}
+<link href="{% static 'movies/list.css' %}" rel="stylesheet" />
+{% endblock %}
+
+{% block script %}
+<script src="{% static 'movies/public.js' %}" defer></script>
+{% endblock %}
+
+{% block content %}
+
+<div style="text-align:center">
+  <h1 style="color:orange;">{{ playlist.user }}'s {{ playlist.name }} <span style="color: rgb(190, 103, 103)">({{ count }})</span></h1>
+  <a href="{% url 'profile' playlist.user %}" class="btn btn-info">Back</a>
+</div>
+
+{% if count %}
+<div class="row row-cols-1 row-cols-md-3 g-4">
+{% for id in lst %}
+  <div class="col {{ id }}">
+    <!-- Collection Movies here -->
+  </div>
+{% endfor %}
+</div>
+{% else %}
+<div style='color:white; text-align:center'>
+  <h1>:(</h1>
+  <h1>Oops! The playlist is empty.</h1>
+</div>
+{% endif %}
+
+{% endblock %}

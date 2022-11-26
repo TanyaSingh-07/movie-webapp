@@ -1,0 +1,139 @@
+{% extends 'movies/layout.html' %} {% load static %} {% block style %}
+<link href="{% static 'movies/index.css' %}" rel="stylesheet" />
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+/>
+{% endblock %} {% block script %}
+<script src="{% static 'movies/index.js' %}" defer></script>
+{% endblock %} {% block title %}Movies{% endblock %} {% block content %}
+<div class="container" style="margin: auto; padding: 1em">
+  <div id="search">
+    <div id="wrapper">
+      <h1>Movies</h1>
+      <input
+        id="title"
+        type="text"
+        placeholder="Search for movies..."
+        style="border-radius: 15px"
+      />
+      <button id="search-btn" disabled>Search</button>
+      <ul id="todo-list"></ul>
+    </div>
+  </div>
+
+  <div id="error-view" style="display: none; padding: 1em">
+  </div>
+
+  <div id="checklist" style="display: none; padding: 1em">
+    <div style="padding: 1em" id="search-card">
+      <!-- Movie card here -->
+    </div>
+    <div style="text-align: center; padding: 0.2em">
+      <form action="{% url 'playlist' %}" method="POST">
+        {% csrf_token %}
+        <input
+          type="text"
+          id="playlist-id"
+          style="display: none"
+          name="imdb_id"
+        />
+        <button class="btn btn-info" id="watchlist-btn">
+          Add to Watchlist
+        </button>
+      </form>
+    </div>
+    
+  </div>
+
+  <!-- Create New MovieList -->
+  <div style="padding: 1em" id="list-view">
+    <!-- Movie List Here -->
+    <div class="card" style="width: 18rem; margin: auto">
+      <div class="card-body">
+        <div style="text-align: center">
+          <i
+            class="fa fa-plus-circle"
+            style="font-size: 36px; color: black; cursor: pointer"
+            id="plus"
+          ></i>
+          <h5 class="card-title">Create New MovieList</h5>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div
+    style="margin: auto; width: 18rem; display: none; padding: 1em"
+    id="form-view"
+  >
+    <form method="post">
+      {% csrf_token %}
+      <input
+        class="form-control"
+        type="text"
+        placeholder="Enter Title Here..."
+        aria-label="default input example"
+        name="title"
+      />
+      <div>
+        <input
+          type="checkbox"
+          class="form-check-input"
+          name="visibility"
+          value="Private"
+          id="private"
+        />
+        <label
+          class="form-check-label"
+          for="private"
+          style="color: gray; font-size: 22px"
+          >Private</label
+        >
+      </div>
+      <div style="text-align: center; margin-top: 10px">
+        <button
+          type="submit"
+          class="btn btn-success"
+          style="margin: 5px"
+          id="create-btn"
+        >
+          Create
+        </button>
+        <button class="btn btn-danger" style="margin: 5px" id="cancel-btn-danger">
+          Cancel
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <div id="playlist-view" class="row row-cols-1 row-cols-md-3 g-4">
+    {% for list in lists %}
+    <div class="col">
+      <div style="margin:auto; width: 20rem;" class="card">
+        <div class="card-body">
+          <h5 class="card-title" style="text-align: center">
+            {{ list.name }} {% if list.private %}
+            <span class="badge rounded-pill bg-dark">Private</span>
+            {% else %}
+            <span class="badge rounded-pill bg-info text-dark">Public</span>
+            {% endif %}
+          </h5>
+          <div style="text-align: center">
+            <a href="{% url 'list' list.name %}" class="btn btn-outline-info"
+              >View</a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+    {% empty %}
+    <div class="card text-center">
+      <div class="card-body">
+        <h5 class="card-title">Empty MovieLists</h5>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends 'movies/layout.html' %}
+{% load static %}
+
+{% block title %}List{% endblock %}
+
+{% block style %}
+<link href="{% static 'movies/list.css' %}" rel="stylesheet" />
+{% endblock %}
+
+{% block script %}
+<script src="{% static 'movies/list.js' %}" defer></script>
+{% endblock %}
+
+{% block content %}
+
+<h1 style="color:orange; text-align:center;"><strong>{{ name }}</strong> <span style="color: white">({{ count }})</span></h1>
+
+{% if count %}
+<div class="row row-cols-1 row-cols-md-3 g-4">
+{% for id in lst %}
+  <div class="col {{ id }}">
+    <!-- Collection Movies here -->
+  </div>
+{% endfor %}
+</div>
+{% else %}
+<div style='color:white; text-align:center'>
+  <h1>:(</h1>
+  <h1>Oops! The playlist is empty.</h1>
+</div>
+{% endif %}
+
+<div style="text-align:center">
+  <a href="{% url 'index' %}" class="btn btn-info">Back</a>
+</div>
+
+
+{% endblock %}

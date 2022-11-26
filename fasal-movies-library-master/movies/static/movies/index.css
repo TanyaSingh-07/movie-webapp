@@ -1,0 +1,42 @@
+#search {
+  width: 70vw;
+  background-color: grey;
+  color: blue;
+  padding: 12px;
+  border-radius: 12px;
+  margin: auto;
+  text-align: center;
+}
+
+body {
+  background-color: rgb(29, 27, 27);
+}
+
+input {
+  font-size: 24px;
+  padding: 8px 8px;
+  outline: none;
+  width: 50%;
+}
+
+#search-btn {
+  font-size: 24px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  background-color: lightblue;
+  transition: 0.5s;
+  cursor: pointer;
+}
+
+#search-btn:disabled {
+  background-color: revert;
+  cursor: default;
+}
+
+.wrapper {
+  width: 70vw;
+  margin: auto;
+  text-align: center;
+  background: grey;
+  color: white;
+}

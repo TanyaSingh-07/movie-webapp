@@ -1,0 +1,35 @@
+{% extends 'movies/layout.html' %}
+{% load static %}
+
+{% block title %}Profile{% endblock %}
+
+{% block style %}
+<link href="{% static 'movies/list.css' %}" rel="stylesheet" />
+{% endblock %}
+
+{% block content %}
+
+<div style="text-align: center">
+  <h1 style="color: rgb(226, 58, 58)">{{ user }}</h1>
+  <h3 style="color: white">Playlists({{ count }})</h3>
+</div>
+
+{% for playlist in playlists %}
+<div class="card text-center" style="margin: 10px">
+  <div class="card-body">
+    <h5 class="card-title">
+      <a href="{% url 'public' playlist.id %}" style="text-decoration:none">{{ playlist.name }}</a>
+    </h5>
+  </div>
+</div>
+{% empty %}
+<div class="card text-center">
+  <div class="card-body">
+    <h5 class="card-title">
+      No playlists found.
+    </h5>
+  </div>
+</div>
+{% endfor %}
+
+{% endblock %}
