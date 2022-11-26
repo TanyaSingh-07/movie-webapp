@@ -10,6 +10,8 @@
 
 ·        You can use OMDB API for the movie search option.
 
+
+
 #APIs Used
 The Open Movie Database APIs
 
@@ -20,6 +22,8 @@ Method: GET
 Search URL: https://www.omdbapi.com/?s={MOVIE_NAME}&apikey={API_KEY}
 
 Movie Details URL: https://www.omdbapi.com/?i={MOVIE_ID}&apikey={API_KEY}
+
+
 
 #Features 💼
  listing movies from movie api
